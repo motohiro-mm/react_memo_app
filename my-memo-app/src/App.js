@@ -1,11 +1,51 @@
-import './App.css';
+import { useState } from "react";
+import NewMemoButton from "./NewMemoButton.js";
+import MemoForm from "./MemoForm.js";
+import MemoList from "./MemoList.js";
 
-function App() {
+export default function App() {
+  const memos = getMemos();
+  const [selectedMemo, setSelectedMemo] = useState(null);
+  const [formStatus, setFormStatus] = useState(null);
+
+  function getMemos() {
+    const memos = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const memo = {};
+      const key = localStorage.key(i);
+      memo.id = key;
+      memo.text = localStorage.getItem(key);
+      memos.push(memo);
+    }
+    return memos;
+  }
+
   return (
-    <div className="App">
-          Learn React
-    </div>
+    <>
+      <h1>Memo List</h1>
+      <MemoList
+        memos={memos}
+        selectedMemo={selectedMemo}
+        onSelect={(memo) => {
+          setSelectedMemo(memo);
+          setFormStatus("edit");
+        }}
+      />
+      <NewMemoButton
+        handleClick={() => {
+          setSelectedMemo({ id: 0, text: "" });
+          setFormStatus("new");
+        }}
+      />
+      {selectedMemo ? (
+        <MemoForm
+          key={selectedMemo.id}
+          memo={selectedMemo}
+          status={formStatus}
+        />
+      ) : (
+        <br />
+      )}
+    </>
   );
 }
-
-export default App;
