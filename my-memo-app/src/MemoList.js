@@ -1,6 +1,9 @@
 export default function MemoList({ memos, selectedMemo, onSelect }) {
   function pickUpMemoTitle(memoText) {
-    return memoText.slice(0, memoText.indexOf("\n"));
+    const memoTitle = memoText.includes("\n")
+      ? memoText.slice(0, memoText.indexOf("\n"))
+      : memoText;
+    return memoTitle;
   }
 
   return (
