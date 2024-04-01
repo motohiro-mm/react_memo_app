@@ -12,6 +12,11 @@ export default function MemoList({ memos, selectedMemo, onSelect }) {
         {memos.map((memo) => (
           <li key={memo.id}>
             <button
+              className={
+                selectedMemo && selectedMemo.id === memo.id
+                  ? "activeButton"
+                  : "normalButton"
+              }
               onClick={() => {
                 onSelect(memo);
               }}

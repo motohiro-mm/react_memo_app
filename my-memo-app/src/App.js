@@ -1,3 +1,4 @@
+import "./App.css";
 import { useState } from "react";
 import NewMemoButton from "./NewMemoButton.js";
 import MemoForm from "./MemoForm.js";
@@ -23,29 +24,34 @@ export default function App() {
   return (
     <>
       <h1>Memo List</h1>
-      <MemoList
-        memos={memos}
-        selectedMemo={selectedMemo}
-        onSelect={(memo) => {
-          setSelectedMemo(memo);
-          setFormStatus("edit");
-        }}
-      />
-      <NewMemoButton
-        handleClick={() => {
-          setSelectedMemo({ id: 0, text: "" });
-          setFormStatus("new");
-        }}
-      />
-      {selectedMemo ? (
-        <MemoForm
-          key={selectedMemo.id}
-          memo={selectedMemo}
-          status={formStatus}
+      <div className="main">
+        <MemoList
+          memos={memos}
+          selectedMemo={selectedMemo}
+          onSelect={(memo) => {
+            setSelectedMemo(memo);
+            setFormStatus("edit");
+          }}
         />
-      ) : (
-        <br />
-      )}
+        <NewMemoButton
+          selectedMemo={selectedMemo}
+          handleClick={() => {
+            setSelectedMemo({ id: 0, text: "" });
+            setFormStatus("new");
+          }}
+        />
+      </div>
+      <div className="form">
+        {selectedMemo ? (
+          <MemoForm
+            key={selectedMemo.id}
+            memo={selectedMemo}
+            status={formStatus}
+          />
+        ) : (
+          <br />
+        )}
+      </div>
     </>
   );
 }

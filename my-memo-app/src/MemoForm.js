@@ -18,6 +18,8 @@ export default function MemoForm({ memo, status }) {
   return (
     <form>
       <textarea
+        rows="6"
+        placeholder={status === "new" ? "ここに登録したいメモを記入" : ""}
         value={memoText}
         onChange={(e) => {
           setMemoText(e.target.value);
