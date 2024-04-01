@@ -12,11 +12,8 @@ export default function App() {
   function getMemos() {
     const memos = [];
     for (let i = 0; i < localStorage.length; i++) {
-      const memo = {};
       const key = localStorage.key(i);
-      memo.id = key;
-      memo.text = localStorage.getItem(key);
-      memos.push(memo);
+      memos.push({ id: key, text: localStorage.getItem(key) });
     }
     return memos;
   }
