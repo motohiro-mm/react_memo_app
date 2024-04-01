@@ -25,7 +25,7 @@ export default function MemoForm({ memo, status }) {
           setMemoText(e.target.value);
         }}
       />
-      <div>
+      <div className="formButton">
         <button
           type="submit"
           onClick={() => {
@@ -38,8 +38,6 @@ export default function MemoForm({ memo, status }) {
         >
           Save
         </button>
-      </div>
-      <div>
         {status === "edit" && (
           <button type="submit" onClick={() => handleDeleteMemo(memo.id)}>
             Delete
