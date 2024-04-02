@@ -39,14 +39,12 @@ export default function App() {
         />
       </div>
       <div className="form">
-        {selectedMemo ? (
+        {selectedMemo && (
           <MemoForm
             key={selectedMemo.id}
             memo={selectedMemo}
             status={formStatus}
           />
-        ) : (
-          <br />
         )}
       </div>
     </>
