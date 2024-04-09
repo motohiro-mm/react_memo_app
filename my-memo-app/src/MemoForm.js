@@ -1,25 +1,17 @@
 import { useState } from "react";
 
-export default function MemoForm({ memo, status }) {
-  const [memoText, setMemoText] = useState(memo.text);
-
-  function handleAddMemo(memo) {
-    localStorage.setItem(window.crypto.randomUUID(), memo);
-  }
-
-  function handleEditMemo({ memoId, editedMemo }) {
-    localStorage.setItem(memoId, editedMemo);
-  }
-
-  function handleDeleteMemo(memoId) {
-    localStorage.removeItem(memoId);
-  }
+export default function MemoForm({
+  selectedMemo,
+  handleChangeMemos,
+  handleDeleteMemos,
+}) {
+  const [memoText, setMemoText] = useState(selectedMemo.text);
 
   return (
     <form>
       <textarea
         rows="6"
-        placeholder={status === "new" ? "ここに登録したいメモを記入" : ""}
+        placeholder={!selectedMemo.id ? "ここに登録したいメモを記入" : ""}
         value={memoText}
         onChange={(e) => {
           setMemoText(e.target.value);
@@ -27,19 +19,20 @@ export default function MemoForm({ memo, status }) {
       />
       <div className="formButton">
         <button
-          type="submit"
-          onClick={() => {
-            if (status === "edit") {
-              return handleEditMemo({ memoId: memo.id, editedMemo: memoText });
-            } else if (status === "new") {
-              return handleAddMemo(memoText);
-            }
+          onClick={(e) => {
+            e.preventDefault();
+            handleChangeMemos(memoText);
           }}
         >
           Save
         </button>
-        {status === "edit" && (
-          <button type="submit" onClick={() => handleDeleteMemo(memo.id)}>
+        {selectedMemo.id !== 0 && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              handleDeleteMemos();
+            }}
+          >
             Delete
           </button>
         )}

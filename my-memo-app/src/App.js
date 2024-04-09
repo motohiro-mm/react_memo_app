@@ -1,21 +1,35 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewMemoButton from "./NewMemoButton.js";
 import MemoForm from "./MemoForm.js";
 import MemoList from "./MemoList.js";
 
 export default function App() {
-  const memos = getMemos();
-  const [selectedMemo, setSelectedMemo] = useState(null);
-  const [formStatus, setFormStatus] = useState(null);
+  const initialMemos = JSON.parse(localStorage.getItem("memos")) ?? [];
 
-  function getMemos() {
-    const memos = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      memos.push({ id: key, text: localStorage.getItem(key) });
-    }
-    return memos;
+  const [memos, setMemos] = useState(initialMemos);
+  const [selectedMemo, setSelectedMemo] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("memos", JSON.stringify(memos));
+  }, [memos]);
+
+  const newId = window.crypto.randomUUID();
+
+  function changeMemos(memoText) {
+    return selectedMemo.id
+      ? memos.map((memo) => {
+          if (memo.length || memo.id === selectedMemo.id) {
+            return { id: memo.id, text: memoText };
+          } else {
+            return memo;
+          }
+        })
+      : [...memos, { id: newId, text: memoText }];
+  }
+
+  function deleteMemos() {
+    return memos.filter((memo) => memo.id !== selectedMemo.id);
   }
 
   return (
@@ -27,14 +41,12 @@ export default function App() {
           selectedMemo={selectedMemo}
           onSelect={(memo) => {
             setSelectedMemo(memo);
-            setFormStatus("edit");
           }}
         />
         <NewMemoButton
           selectedMemo={selectedMemo}
           handleClick={() => {
             setSelectedMemo({ id: 0, text: "" });
-            setFormStatus("new");
           }}
         />
       </div>
@@ -42,8 +54,16 @@ export default function App() {
         {selectedMemo && (
           <MemoForm
             key={selectedMemo.id}
-            memo={selectedMemo}
-            status={formStatus}
+            selectedMemo={selectedMemo}
+            handleChangeMemos={(memoText) => {
+              setMemos(changeMemos(memoText));
+              !selectedMemo.id &&
+                setSelectedMemo({ id: newId, text: memoText });
+            }}
+            handleDeleteMemos={() => {
+              setMemos(deleteMemos());
+              setSelectedMemo(null);
+            }}
           />
         )}
       </div>
