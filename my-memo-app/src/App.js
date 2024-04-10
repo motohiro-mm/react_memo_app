@@ -14,9 +14,7 @@ export default function App() {
     localStorage.setItem("memos", JSON.stringify(memos));
   }, [memos]);
 
-  const newId = window.crypto.randomUUID();
-
-  function changeMemos(memoText) {
+  function changeMemos(memoText, newId) {
     return selectedMemo.id
       ? memos.map((memo) => {
           if ( memo.id === selectedMemo.id) {
@@ -56,7 +54,8 @@ export default function App() {
             key={selectedMemo.id}
             selectedMemo={selectedMemo}
             handleChangeMemos={(memoText) => {
-              setMemos(changeMemos(memoText));
+              const newId = window.crypto.randomUUID();
+              setMemos(changeMemos(memoText, newId));
               !selectedMemo.id &&
                 setSelectedMemo({ id: newId, text: memoText });
             }}
