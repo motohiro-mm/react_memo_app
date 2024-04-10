@@ -44,7 +44,7 @@ export default function App() {
         <NewMemoButton
           selectedMemo={selectedMemo}
           handleClick={() => {
-            setSelectedMemo({ id: 0, text: "" });
+            setSelectedMemo({ text: "" });
           }}
         />
       </div>

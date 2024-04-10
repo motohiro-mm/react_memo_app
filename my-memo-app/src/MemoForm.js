@@ -26,7 +26,7 @@ export default function MemoForm({
         >
           Save
         </button>
-        {selectedMemo.id !== 0 && (
+        {selectedMemo.id && (
           <button
             onClick={(e) => {
               e.preventDefault();
