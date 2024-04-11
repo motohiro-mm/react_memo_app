@@ -9,6 +9,7 @@ export default function App() {
 
   const [memos, setMemos] = useState(initialMemos);
   const [selectedMemo, setSelectedMemo] = useState(null);
+  const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("memos", JSON.stringify(memos));
@@ -33,6 +34,13 @@ export default function App() {
   return (
     <>
       <h1>Memo List</h1>
+      {/* あとでけすこと↓ */}
+      <p>{isLogged ? "isLogged = true" : "isLogged = false"}</p>
+      <div className="login">
+        <button onClick={() => setIsLogged(!isLogged)}>
+          {isLogged ? "ログアウト" : "ログイン"}
+        </button>
+      </div>
       <div className="main">
         <MemoList
           memos={memos}
@@ -46,6 +54,7 @@ export default function App() {
           handleClick={() => {
             setSelectedMemo({ text: "" });
           }}
+          isLogged={isLogged}
         />
       </div>
       <div className="form">
@@ -63,6 +72,7 @@ export default function App() {
               setMemos(deleteMemos());
               setSelectedMemo(null);
             }}
+            isLogged={isLogged}
           />
         )}
       </div>
