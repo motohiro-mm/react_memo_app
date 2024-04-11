@@ -33,11 +33,16 @@ export default function App() {
 
   return (
     <>
+    <div className="title">
       <h1>Memo List</h1>
-      {/* あとでけすこと↓ */}
-      <p>{isLogged ? "isLogged = true" : "isLogged = false"}</p>
+      </div>
       <div className="login">
-        <button onClick={() => setIsLogged(!isLogged)}>
+        <button             className={
+              isLogged
+                ? "logoutButton"
+                : "loginButton"
+            }
+onClick={() => setIsLogged(!isLogged)}>
           {isLogged ? "ログアウト" : "ログイン"}
         </button>
       </div>

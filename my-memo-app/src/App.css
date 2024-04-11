@@ -1,5 +1,38 @@
+.title {
+  width: 40%;
+  display: inline-block;
+}
+
 h1 {
   padding: 20px;
+}
+
+.login {
+  width: 60%;
+  float: right;
+  display: block;
+}
+
+.login button {
+  float: right;
+  text-align: center;
+  margin: 50px;
+  text-decoration: none;
+  width: 110px;
+  padding: 5px;
+  font-weight: bold;
+  border: 2px solid black;
+  border-radius: 100vh;
+}
+
+.login .loginButton {
+  background: #fff;
+  color: black;
+}
+
+.login .logoutButton {
+  background: black;
+  color: #fff;
 }
 
 .main {
