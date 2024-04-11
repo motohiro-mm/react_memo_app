@@ -17,7 +17,7 @@ export default function App() {
   function changeMemos(memoText, newId) {
     return selectedMemo.id
       ? memos.map((memo) => {
-          if ( memo.id === selectedMemo.id) {
+          if (memo.id === selectedMemo.id) {
             return { ...memo, text: memoText };
           } else {
             return memo;
