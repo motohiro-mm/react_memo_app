@@ -1,10 +1,10 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import { NewMemoButton } from "./NewMemoButton.js";
-import { MemoForm } from "./MemoForm.js";
-import { MemoList } from "./MemoList.js";
-import { useLogin } from "./LoginProvider";
-import { useSelectedMemo } from "./SelectedMemoProvider";
+import { NewMemoButton } from "./components/NewMemoButton";
+import { MemoForm } from "./components/MemoForm";
+import { MemoList } from "./components/MemoList";
+import { useLogin } from "./hooks/LoginHooks";
+import { useSelectedMemo } from "./hooks/SelectedMemoHooks";
 
 export const App = () => {
   const initialMemos = JSON.parse(localStorage.getItem("memos")) ?? [];

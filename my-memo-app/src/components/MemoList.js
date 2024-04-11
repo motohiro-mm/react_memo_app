@@ -1,4 +1,4 @@
-import { useSelectedMemo } from "./SelectedMemoProvider";
+import { useSelectedMemo } from "../hooks/SelectedMemoHooks";
 
 export const MemoList = ({ memos, onSelect }) => {
   const { selectedMemo } = useSelectedMemo();

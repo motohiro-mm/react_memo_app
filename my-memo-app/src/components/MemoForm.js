@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useLogin } from "./LoginProvider";
-import { useSelectedMemo } from "./SelectedMemoProvider";
+import { useLogin } from "../hooks/LoginHooks";
+import { useSelectedMemo } from "../hooks/SelectedMemoHooks";
 
 export const MemoForm = ({ handleChangeMemos, handleDeleteMemos }) => {
   const { isLogged } = useLogin();

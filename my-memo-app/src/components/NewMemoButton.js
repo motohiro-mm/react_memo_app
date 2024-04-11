@@ -1,5 +1,5 @@
-import { useLogin } from "./LoginProvider";
-import { useSelectedMemo } from "./SelectedMemoProvider";
+import { useLogin } from "../hooks/LoginHooks";
+import { useSelectedMemo } from "../hooks/SelectedMemoHooks";
 
 export const NewMemoButton = ({ handleClick }) => {
   const { isLogged } = useLogin();
