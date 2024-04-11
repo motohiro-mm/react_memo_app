@@ -1,15 +1,16 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import NewMemoButton from "./NewMemoButton.js";
 import MemoForm from "./MemoForm.js";
 import MemoList from "./MemoList.js";
+import { LoginContext } from "./LoginProvider";
 
 export default function App() {
   const initialMemos = JSON.parse(localStorage.getItem("memos")) ?? [];
 
   const [memos, setMemos] = useState(initialMemos);
   const [selectedMemo, setSelectedMemo] = useState(null);
-  const [isLogged, setIsLogged] = useState(false);
+  const { isLogged, setIsLogged } = useContext(LoginContext);
 
   useEffect(() => {
     localStorage.setItem("memos", JSON.stringify(memos));
@@ -33,16 +34,15 @@ export default function App() {
 
   return (
     <>
-    <div className="title">
-      <h1>Memo List</h1>
+      {" "}
+      <div className="title">
+        <h1>Memo List</h1>
       </div>
       <div className="login">
-        <button             className={
-              isLogged
-                ? "logoutButton"
-                : "loginButton"
-            }
-onClick={() => setIsLogged(!isLogged)}>
+        <button
+          className={isLogged ? "logoutButton" : "loginButton"}
+          onClick={() => setIsLogged(!isLogged)}
+        >
           {isLogged ? "ログアウト" : "ログイン"}
         </button>
       </div>
@@ -59,7 +59,6 @@ onClick={() => setIsLogged(!isLogged)}>
           handleClick={() => {
             setSelectedMemo({ text: "" });
           }}
-          isLogged={isLogged}
         />
       </div>
       <div className="form">
@@ -77,7 +76,6 @@ onClick={() => setIsLogged(!isLogged)}>
               setMemos(deleteMemos());
               setSelectedMemo(null);
             }}
-            isLogged={isLogged}
           />
         )}
       </div>

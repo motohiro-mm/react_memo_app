@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { LoginContext } from "./LoginProvider";
 
 export default function MemoForm({
   selectedMemo,
   handleChangeMemos,
   handleDeleteMemos,
-  isLogged,
 }) {
   const [memoText, setMemoText] = useState(selectedMemo.text);
+  const { isLogged } = useContext(LoginContext);
 
   return (
     <>
