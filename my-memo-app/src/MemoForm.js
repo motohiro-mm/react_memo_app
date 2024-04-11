@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLogin } from "./LoginProvider";
 import { useSelectedMemo } from "./SelectedMemoProvider";
 
-export default function MemoForm({ handleChangeMemos, handleDeleteMemos }) {
+export const MemoForm = ({ handleChangeMemos, handleDeleteMemos }) => {
   const { isLogged } = useLogin();
   const { selectedMemo } = useSelectedMemo();
   const [memoText, setMemoText] = useState(selectedMemo.text);
@@ -47,4 +47,4 @@ export default function MemoForm({ handleChangeMemos, handleDeleteMemos }) {
       )}
     </>
   );
-}
+};

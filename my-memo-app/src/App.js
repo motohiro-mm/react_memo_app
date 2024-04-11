@@ -1,12 +1,12 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import NewMemoButton from "./NewMemoButton.js";
-import MemoForm from "./MemoForm.js";
-import MemoList from "./MemoList.js";
+import { NewMemoButton } from "./NewMemoButton.js";
+import { MemoForm } from "./MemoForm.js";
+import { MemoList } from "./MemoList.js";
 import { useLogin } from "./LoginProvider";
 import { useSelectedMemo } from "./SelectedMemoProvider";
 
-export default function App() {
+export const App = () => {
   const initialMemos = JSON.parse(localStorage.getItem("memos")) ?? [];
 
   const [memos, setMemos] = useState(initialMemos);
@@ -17,7 +17,7 @@ export default function App() {
     localStorage.setItem("memos", JSON.stringify(memos));
   }, [memos]);
 
-  function changeMemos(memoText, newId) {
+  const changeMemos = (memoText, newId) => {
     return selectedMemo.id
       ? memos.map((memo) => {
           if (memo.id === selectedMemo.id) {
@@ -27,11 +27,11 @@ export default function App() {
           }
         })
       : [...memos, { id: newId, text: memoText }];
-  }
+  };
 
-  function deleteMemos() {
+  const deleteMemos = () => {
     return memos.filter((memo) => memo.id !== selectedMemo.id);
-  }
+  };
 
   return (
     <>
@@ -78,4 +78,4 @@ export default function App() {
       </div>
     </>
   );
-}
+};

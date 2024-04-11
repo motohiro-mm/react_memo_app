@@ -1,7 +1,7 @@
 import { useLogin } from "./LoginProvider";
 import { useSelectedMemo } from "./SelectedMemoProvider";
 
-export default function NewMemoButton({ handleClick }) {
+export const NewMemoButton = ({ handleClick }) => {
   const { isLogged } = useLogin();
   const { selectedMemo } = useSelectedMemo();
 
@@ -23,4 +23,4 @@ export default function NewMemoButton({ handleClick }) {
       )}
     </>
   );
-}
+};

@@ -1,14 +1,14 @@
 import { useSelectedMemo } from "./SelectedMemoProvider";
 
-export default function MemoList({ memos, onSelect }) {
+export const MemoList = ({ memos, onSelect }) => {
   const { selectedMemo } = useSelectedMemo();
 
-  function pickUpMemoTitle(memoText) {
+  const pickUpMemoTitle = (memoText) => {
     const memoTitle = memoText.includes("\n")
       ? memoText.slice(0, memoText.indexOf("\n"))
       : memoText;
     return memoTitle;
-  }
+  };
 
   return (
     <ul>
@@ -30,4 +30,4 @@ export default function MemoList({ memos, onSelect }) {
       ))}
     </ul>
   );
-}
+};
