@@ -1,17 +1,17 @@
 import "./App.css";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import NewMemoButton from "./NewMemoButton.js";
 import MemoForm from "./MemoForm.js";
 import MemoList from "./MemoList.js";
-import { LoginContext } from "./LoginProvider";
-import { SelectedMemoContext } from "./SelectedMemoProvider";
+import { useLogin } from "./LoginProvider";
+import { useSelectedMemo } from "./SelectedMemoProvider";
 
 export default function App() {
   const initialMemos = JSON.parse(localStorage.getItem("memos")) ?? [];
 
   const [memos, setMemos] = useState(initialMemos);
-  const { isLogged, setIsLogged } = useContext(LoginContext);
-  const { selectedMemo, setSelectedMemo } = useContext(SelectedMemoContext);
+  const { isLogged, setIsLogged } = useLogin();
+  const { selectedMemo, setSelectedMemo } = useSelectedMemo();
 
   useEffect(() => {
     localStorage.setItem("memos", JSON.stringify(memos));

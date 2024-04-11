@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { SelectedMemoContext } from "./SelectedMemoProvider";
+import { useSelectedMemo } from "./SelectedMemoProvider";
 
 export default function MemoList({ memos, onSelect }) {
-  const { selectedMemo } = useContext(SelectedMemoContext);
+  const { selectedMemo } = useSelectedMemo();
 
   function pickUpMemoTitle(memoText) {
     const memoTitle = memoText.includes("\n")

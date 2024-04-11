@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useContext } from "react";
 
 export const LoginContext = createContext({});
 
@@ -13,3 +13,5 @@ export const LoginProvider = (props) => {
     </LoginContext.Provider>
   );
 };
+
+export const useLogin = () => useContext(LoginContext);

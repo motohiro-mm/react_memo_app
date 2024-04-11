@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useContext } from "react";
 
 export const SelectedMemoContext = createContext({});
 
@@ -13,3 +13,5 @@ export const SelectedMemoProvider = (props) => {
     </SelectedMemoContext.Provider>
   );
 };
+
+export const useSelectedMemo = () => useContext(SelectedMemoContext);

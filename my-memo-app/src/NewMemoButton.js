@@ -1,10 +1,9 @@
-import { useContext } from "react";
-import { LoginContext } from "./LoginProvider";
-import { SelectedMemoContext } from "./SelectedMemoProvider";
+import { useLogin } from "./LoginProvider";
+import { useSelectedMemo } from "./SelectedMemoProvider";
 
 export default function NewMemoButton({ handleClick }) {
-  const { isLogged } = useContext(LoginContext);
-  const { selectedMemo } = useContext(SelectedMemoContext);
+  const { isLogged } = useLogin();
+  const { selectedMemo } = useSelectedMemo();
 
   return (
     <>
