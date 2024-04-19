@@ -1,6 +1,6 @@
 import { useState, createContext, useContext } from "react";
 
-export const SelectedMemoContext = createContext({});
+const SelectedMemoContext = createContext({});
 
 export const SelectedMemoProvider = (props) => {
   const { children } = props;

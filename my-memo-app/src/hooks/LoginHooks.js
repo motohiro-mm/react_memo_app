@@ -1,6 +1,6 @@
 import { useState, createContext, useContext } from "react";
 
-export const LoginContext = createContext({});
+const LoginContext = createContext({});
 
 export const LoginProvider = (props) => {
   const { children } = props;
