@@ -4,14 +4,13 @@ import { NewMemoButton } from "./components/NewMemoButton";
 import { MemoForm } from "./components/MemoForm";
 import { MemoList } from "./components/MemoList";
 import { useLogin } from "./hooks/LoginHooks";
-import { useSelectedMemo } from "./hooks/SelectedMemoHooks";
 
 export const App = () => {
   const initialMemos = JSON.parse(localStorage.getItem("memos")) ?? [];
 
   const [memos, setMemos] = useState(initialMemos);
+  const [selectedMemo, setSelectedMemo] = useState(null);
   const { isLogged, setIsLogged } = useLogin();
-  const { selectedMemo, setSelectedMemo } = useSelectedMemo();
 
   useEffect(() => {
     localStorage.setItem("memos", JSON.stringify(memos));
@@ -49,11 +48,13 @@ export const App = () => {
       <div className="main">
         <MemoList
           memos={memos}
+          selectedMemo={selectedMemo}
           onSelect={(memo) => {
             setSelectedMemo(memo);
           }}
         />
         <NewMemoButton
+          selectedMemo={selectedMemo}
           handleClick={() => {
             setSelectedMemo({ text: "" });
           }}
@@ -63,6 +64,7 @@ export const App = () => {
         {selectedMemo && (
           <MemoForm
             key={selectedMemo.id}
+            selectedMemo={selectedMemo}
             handleChangeMemos={(memoText) => {
               const newId = window.crypto.randomUUID();
               setMemos(changeMemos(memoText, newId));

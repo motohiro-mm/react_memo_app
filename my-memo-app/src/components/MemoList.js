@@ -1,8 +1,4 @@
-import { useSelectedMemo } from "../hooks/SelectedMemoHooks";
-
-export const MemoList = ({ memos, onSelect }) => {
-  const { selectedMemo } = useSelectedMemo();
-
+export const MemoList = ({ memos, selectedMemo, onSelect }) => {
   const pickUpMemoTitle = (memoText) => {
     const memoTitle = memoText.includes("\n")
       ? memoText.slice(0, memoText.indexOf("\n"))

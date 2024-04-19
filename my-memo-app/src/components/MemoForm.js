@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/LoginHooks";
-import { useSelectedMemo } from "../hooks/SelectedMemoHooks";
 
-export const MemoForm = ({ handleChangeMemos, handleDeleteMemos }) => {
+export const MemoForm = ({
+  selectedMemo,
+  handleChangeMemos,
+  handleDeleteMemos,
+}) => {
   const { isLogged } = useLogin();
-  const { selectedMemo } = useSelectedMemo();
   const [memoText, setMemoText] = useState(selectedMemo.text);
 
   return (
