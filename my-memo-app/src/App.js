@@ -10,7 +10,7 @@ export const App = () => {
 
   const [memos, setMemos] = useState(initialMemos);
   const [selectedMemo, setSelectedMemo] = useState(null);
-  const { isLogged, setIsLogged } = useLogin();
+  const { isLogin, setIsLogin } = useLogin();
 
   useEffect(() => {
     localStorage.setItem("memos", JSON.stringify(memos));
@@ -39,10 +39,10 @@ export const App = () => {
       </div>
       <div className="login">
         <button
-          className={isLogged ? "logoutButton" : "loginButton"}
-          onClick={() => setIsLogged(!isLogged)}
+          className={isLogin ? "logoutButton" : "loginButton"}
+          onClick={() => setIsLogin(!isLogin)}
         >
-          {isLogged ? "ログアウト" : "ログイン"}
+          {isLogin ? "ログアウト" : "ログイン"}
         </button>
       </div>
       <div className="main">

@@ -1,11 +1,11 @@
 import { useLogin } from "../hooks/LoginHooks";
 
 export const NewMemoButton = ({ selectedMemo, handleClick }) => {
-  const { isLogged } = useLogin();
+  const { isLogin } = useLogin();
 
   return (
     <>
-      {isLogged && (
+      {isLogin && (
         <section className="newButton">
           <button
             className={

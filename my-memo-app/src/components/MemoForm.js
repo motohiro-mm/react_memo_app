@@ -6,12 +6,12 @@ export const MemoForm = ({
   handleChangeMemos,
   handleDeleteMemos,
 }) => {
-  const { isLogged } = useLogin();
+  const { isLogin } = useLogin();
   const [memoText, setMemoText] = useState(selectedMemo.text);
 
   return (
     <>
-      {isLogged ? (
+      {isLogin ? (
         <form>
           <textarea
             rows="6"
