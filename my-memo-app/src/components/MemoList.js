@@ -1,10 +1,10 @@
-export default function MemoList({ memos, selectedMemo, onSelect }) {
-  function pickUpMemoTitle(memoText) {
+export const MemoList = ({ memos, selectedMemo, onSelect }) => {
+  const pickUpMemoTitle = (memoText) => {
     const memoTitle = memoText.includes("\n")
       ? memoText.slice(0, memoText.indexOf("\n"))
       : memoText;
     return memoTitle;
-  }
+  };
 
   return (
     <ul>
@@ -26,4 +26,4 @@ export default function MemoList({ memos, selectedMemo, onSelect }) {
       ))}
     </ul>
   );
-}
+};

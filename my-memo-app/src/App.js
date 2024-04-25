@@ -1,20 +1,22 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import NewMemoButton from "./NewMemoButton.js";
-import MemoForm from "./MemoForm.js";
-import MemoList from "./MemoList.js";
+import { NewMemoButton } from "./components/NewMemoButton";
+import { MemoForm } from "./components/MemoForm";
+import { MemoList } from "./components/MemoList";
+import { useLogin } from "./hooks/LoginHooks";
 
-export default function App() {
+export const App = () => {
   const initialMemos = JSON.parse(localStorage.getItem("memos")) ?? [];
 
   const [memos, setMemos] = useState(initialMemos);
   const [selectedMemo, setSelectedMemo] = useState(null);
+  const { isLogin, setIsLogin } = useLogin();
 
   useEffect(() => {
     localStorage.setItem("memos", JSON.stringify(memos));
   }, [memos]);
 
-  function changeMemos(memoText, newId) {
+  const changeMemos = (memoText, newId) => {
     return selectedMemo.id
       ? memos.map((memo) => {
           if (memo.id === selectedMemo.id) {
@@ -24,15 +26,25 @@ export default function App() {
           }
         })
       : [...memos, { id: newId, text: memoText }];
-  }
+  };
 
-  function deleteMemos() {
+  const deleteMemos = () => {
     return memos.filter((memo) => memo.id !== selectedMemo.id);
-  }
+  };
 
   return (
     <>
-      <h1>Memo List</h1>
+      <div className="title">
+        <h1>Memo List</h1>
+      </div>
+      <div className="login">
+        <button
+          className={isLogin ? "logoutButton" : "loginButton"}
+          onClick={() => setIsLogin(!isLogin)}
+        >
+          {isLogin ? "ログアウト" : "ログイン"}
+        </button>
+      </div>
       <div className="main">
         <MemoList
           memos={memos}
@@ -68,4 +80,4 @@ export default function App() {
       </div>
     </>
   );
-}
+};
